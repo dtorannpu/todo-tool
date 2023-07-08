@@ -1,0 +1,143 @@
+openapi: 3.0.0
+info:
+  title: API
+  version: 1.0.0
+  description: TODOサービス
+  contact:
+    name: admin
+paths:
+  /todos:
+    get:
+      description: TODO一覧を取得します。
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Todo'
+      operationId: findAll
+      tags:
+        - todo
+    post:
+      summary: ''
+      operationId: add
+      responses:
+        '200':
+          description: OK
+      tags:
+        - todo
+      description: 登録処理
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTodo'
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+          text/html:
+            schema:
+              type: object
+              properties: {}
+  '/todos/{id}':
+    get:
+      summary: Get a todo by ID
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the todo to get
+      responses:
+        '200':
+          description: A single toto.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Todo'
+      description: 指定されたIDのTODOを取得します。
+      tags:
+        - todo
+      operationId: findById
+    put:
+      summary: ''
+      operationId: update
+      responses:
+        '200':
+          description: OK
+      description: 更新処理
+      tags:
+        - todo
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTodo'
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        description: ID
+        required: true
+    delete:
+      summary: ''
+      operationId: delete
+      responses:
+        '200':
+          description: OK
+      description: 削除処理
+      tags:
+        - todo
+components:
+  schemas:
+    Todo:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+    CreateTodo:
+      title: CreateTodo
+      x-stoplight:
+        id: b7ka5v81c6a9g
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - title
+        - description
+    UpdateTodo:
+      title: UpdateTodo
+      x-stoplight:
+        id: ka52jolu23cwq
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+      required:
+        - title
+        - description
+servers:
+  - url: 'http://localhost:8080'
+    description: ''
+tags:
+  - name: todo
