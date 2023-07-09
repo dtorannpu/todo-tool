@@ -1,7 +1,9 @@
+'use client';
+
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { UserProvider } from '@auth0/nextjs-auth0/client';
+import { UserProvider, withPageAuthRequired } from '@auth0/nextjs-auth0/client';
 import Header from '@/components/Header';
 import { Suspense } from 'react';
 import Loading from './loading';
@@ -21,14 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
-      <UserProvider>
-        <body className={inter.className}>
-          <Suspense fallback={<Loading />}>
-            <Header />
-            {children}
-          </Suspense>
-        </body>
-      </UserProvider>
+        <body className={inter.className}>{children}</body>
     </html>
   )
 }

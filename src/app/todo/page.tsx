@@ -1,7 +1,24 @@
 
-import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import Link from 'next/link';
 
-export default withPageAuthRequired(async function Page() {
+interface TodoItem {
+    id: number,
+    title: string,
+    description: string
+}
+
+async function getTodos() {
+    const res = await fetch('http://localhost:8080/todos', { cache: 'no-store' });
+
+    if (!res.ok) {
+        throw new Error('データが取得できませんでした。');
+    }
+
+    return res.json();
+}
+export default async function Page() {
+    const todos = await getTodos();
+
     return (
         <div>
             <h1 className="text-3xl">Todo</h1>
@@ -14,12 +31,17 @@ export default withPageAuthRequired(async function Page() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>タイトル</td>
-                        <td>内容</td>
-                    </tr>
+                    {todos.map((todo: TodoItem) => {
+                        return (
+                            <tr>
+                                <td><Link href={`/todo/${encodeURIComponent(todo.id)}`} className="no-underline hover:underline text-cyan-600">{todo.title}</Link></td>
+                                <td>{todo.description}</td>
+                            </tr>
+                        );
+                    })}
+
                 </tbody>
             </table>
         </div>
     );
-});
+};
