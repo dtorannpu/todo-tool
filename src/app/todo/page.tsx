@@ -33,7 +33,7 @@ export default async function Page() {
                 <tbody>
                     {todos.map((todo: TodoItem) => {
                         return (
-                            <tr>
+                            <tr key={todo.id}>
                                 <td><Link href={`/todo/${encodeURIComponent(todo.id)}`} className="no-underline hover:underline text-cyan-600">{todo.title}</Link></td>
                                 <td>{todo.description}</td>
                             </tr>
