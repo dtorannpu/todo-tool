@@ -3,6 +3,8 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 import Header from '@/components/Header';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,8 +23,10 @@ export default function RootLayout({
     <html lang="ja">
       <UserProvider>
         <body className={inter.className}>
-          <Header />
-          {children}
+          <Suspense fallback={<Loading />}>
+            <Header />
+            {children}
+          </Suspense>
         </body>
       </UserProvider>
     </html>
