@@ -1,4 +1,5 @@
 
+import TodoForm from '@/components/TodoForm';
 import Link from 'next/link';
 
 interface TodoItem {
@@ -23,6 +24,7 @@ export default async function Page() {
         <div>
             <h1 className="text-3xl">Todo</h1>
 
+            <TodoForm />
             <table className="table-auto">
                 <thead>
                     <tr>
