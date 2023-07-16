@@ -7,19 +7,25 @@ interface IFormInput {
     description: String
 }
 
-async function test(data: IFormInput) {
-    await fetch('http://localhost:8080/todos', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    });
-}
-
 const TodoForm = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
-    const onSubmit: SubmitHandler<IFormInput> = async (data) => test(data);
+    const { reset, register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
+    const onSubmit: SubmitHandler<IFormInput> = async (data) => submit(data);
+
+    async function submit(data: IFormInput) {
+        const res = await fetch('http://localhost:8080/todos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (!res.ok) {
+            throw new Error('登録に失敗しました。');
+        }
+
+        reset();
+    }
 
     return (
         <div className='w-full max-w-xl'>
