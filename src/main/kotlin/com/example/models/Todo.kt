@@ -6,7 +6,7 @@ import org.jetbrains.exposed.sql.Table
 @Serializable
 data class Todo(val id: Int, val title: String, val description:String)
 @Serializable
-data class CreateTodo(val title: String, val description: String)
+data class CreateTodo(val title: String?, val description: String?)
 
 object Todos : Table() {
     val id = integer("id").autoIncrement()

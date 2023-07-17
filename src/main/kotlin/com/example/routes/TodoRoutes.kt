@@ -24,13 +24,13 @@ fun Route.todoRouting() {
         }
         post {
             val requestTodo = call.receive<CreateTodo>()
-            val todo = dao.addNewTodo(requestTodo.title, requestTodo.description)
+            val todo = dao.addNewTodo(requestTodo.title!!, requestTodo.description!!)
             call.respond(HttpStatusCode.Created)
         }
         put("{id}") {
             val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
             val todo = call.receive<CreateTodo>()
-            dao.editTodo(id, todo.title, todo.description)
+            dao.editTodo(id, todo.title!!, todo.description!!)
             call.respond(HttpStatusCode.OK)
         }
         delete("{id}") {
