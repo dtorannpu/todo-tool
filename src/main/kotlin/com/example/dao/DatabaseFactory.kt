@@ -8,12 +8,8 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
-    fun init() {
-        val driverClassName = "com.mysql.cj.jdbc.Driver"
-        val jdbcURL = "jdbc:mysql://localhost/todo"
-        val user = "test"
-        val password = "test"
-        val database = Database.connect(jdbcURL, driverClassName, user, password);
+    fun init(driverClassName: String, url: String, user:String, password:String) {
+        val database = Database.connect(url, driverClassName, user, password);
         transaction(database) {
             SchemaUtils.create(Todos)
         }
