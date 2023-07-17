@@ -9,7 +9,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
     fun init(driverClassName: String, url: String, user:String, password:String) {
-        val database = Database.connect(url, driverClassName, user, password);
+        val database = Database.connect(url, driverClassName, user, password)
         transaction(database) {
             SchemaUtils.create(Todos)
         }
