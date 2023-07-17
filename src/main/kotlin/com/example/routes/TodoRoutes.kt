@@ -24,7 +24,7 @@ fun Route.todoRouting() {
         }
         post {
             val requestTodo = call.receive<CreateTodo>()
-            val todo = dao.addNewTodo(requestTodo.title!!, requestTodo.description!!)
+            dao.addNewTodo(requestTodo.title!!, requestTodo.description!!)
             call.respond(HttpStatusCode.Created)
         }
         put("{id}") {
