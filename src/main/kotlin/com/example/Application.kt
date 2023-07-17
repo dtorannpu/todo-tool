@@ -19,6 +19,5 @@ fun Application.module() {
     configureSerialization()
     configureValidation()
     configStatusPages()
-    //configureDatabases()
     configureRouting()
 }
