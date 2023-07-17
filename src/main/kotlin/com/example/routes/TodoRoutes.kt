@@ -1,14 +1,12 @@
 package com.example.routes
 
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
 import com.example.dao.dao
 import com.example.models.CreateTodo
-import com.example.models.Todo
-import com.example.plugins.ExposedUser
 import io.ktor.http.*
+import io.ktor.server.application.*
 import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 
 fun Route.todoRouting() {
     route("/todos") {
