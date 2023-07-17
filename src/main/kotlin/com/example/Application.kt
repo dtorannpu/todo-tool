@@ -16,6 +16,7 @@ fun Application.module() {
         environment.config.property("example.db.password").getString()
     )
     configureHTTP()
+    configureJWT()
     configureSerialization()
     configureValidation()
     configStatusPages()
