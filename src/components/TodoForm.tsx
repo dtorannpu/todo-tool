@@ -25,6 +25,7 @@ const TodoForm = () => {
         }
 
         reset();
+        window.location.reload();
     }
 
     return (
