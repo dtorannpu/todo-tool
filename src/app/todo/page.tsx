@@ -1,5 +1,5 @@
-
 import TodoForm from '@/components/TodoForm';
+import { getAccessToken } from '@auth0/nextjs-auth0';
 import Link from 'next/link';
 
 interface TodoItem {
@@ -9,7 +9,13 @@ interface TodoItem {
 }
 
 async function getTodos() {
-    const res = await fetch('http://localhost:8080/todos', { cache: 'no-store' });
+    const { accessToken } = await getAccessToken();
+    const res = await fetch('http://localhost:8080/todos', {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+        cache: 'no-store'
+    });
 
     if (!res.ok) {
         throw new Error('データが取得できませんでした。');
