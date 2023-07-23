@@ -1,3 +1,4 @@
+import Modal from '@/components/Modal';
 import TodoForm from '@/components/TodoForm';
 import { getAccessToken } from '@auth0/nextjs-auth0';
 import Link from 'next/link';
@@ -29,8 +30,9 @@ export default async function Page() {
     return (
         <div>
             <h1 className="text-3xl">Todo</h1>
-
-            <TodoForm />
+            <Modal buttonLabel="Todo追加">
+                <TodoForm />
+            </Modal>
             <table className="table-auto">
                 <thead>
                     <tr>
