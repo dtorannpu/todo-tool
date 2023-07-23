@@ -5,6 +5,7 @@ import com.example.models.CreateTodo
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -13,11 +14,15 @@ fun Route.todoRouting() {
     authenticate("auth0") {
         route("/todos") {
             get {
-                call.respond(dao.allTodos())
+                val principal = call.principal<JWTPrincipal>()
+                val userId = principal!!.payload.getClaim("sub").asString()
+                call.respond(dao.allTodos(userId))
             }
             get("{id}") {
+                val principal = call.principal<JWTPrincipal>()
+                val userId = principal!!.payload.getClaim("sub").asString()
                 val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-                val todo = dao.todo(id)
+                val todo = dao.todo(userId, id)
                 if (todo != null) {
                     call.respond(HttpStatusCode.OK, todo)
                 } else {
@@ -25,19 +30,25 @@ fun Route.todoRouting() {
                 }
             }
             post {
+                val principal = call.principal<JWTPrincipal>()
+                val userId = principal!!.payload.getClaim("sub").asString()
                 val requestTodo = call.receive<CreateTodo>()
-                dao.addNewTodo(requestTodo.title!!, requestTodo.description!!)
+                dao.addNewTodo(userId, requestTodo.description!!, requestTodo.title!!)
                 call.respond(HttpStatusCode.Created)
             }
             put("{id}") {
+                val principal = call.principal<JWTPrincipal>()
+                val userId = principal!!.payload.getClaim("sub").asString()
                 val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
                 val todo = call.receive<CreateTodo>()
-                dao.editTodo(id, todo.title!!, todo.description!!)
+                dao.editTodo(userId, todo.title!!, todo.description!!, id)
                 call.respond(HttpStatusCode.OK)
             }
             delete("{id}") {
+                val principal = call.principal<JWTPrincipal>()
+                val userId = principal!!.payload.getClaim("sub").asString()
                 val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-                dao.deleteTodo(id)
+                dao.deleteTodo(userId, id)
                 call.respond(HttpStatusCode.OK)
             }
         }

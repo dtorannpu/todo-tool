@@ -12,6 +12,7 @@ object Todos : Table() {
     val id = integer("id").autoIncrement()
     val title = varchar("title", 128)
     val description = varchar("description", 1024)
+    val userId = varchar("user_id", 256).index()
 
     override val primaryKey = PrimaryKey(id)
 }
