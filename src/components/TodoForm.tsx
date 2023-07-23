@@ -12,7 +12,7 @@ const TodoForm = () => {
     const onSubmit: SubmitHandler<IFormInput> = async (data) => submit(data);
 
     async function submit(data: IFormInput) {
-        const res = await fetch('http://localhost:8080/todos', {
+        const res = await fetch('http://localhost:3000/api/todos', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
