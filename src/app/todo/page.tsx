@@ -33,19 +33,19 @@ export default async function Page() {
             <Modal buttonLabel="Todo追加">
                 <TodoForm />
             </Modal>
-            <table className="table-auto">
+            <table className="border-collapse table-auto w-full">
                 <thead>
                     <tr>
-                        <th>タイトル</th>
-                        <th>内容</th>
+                        <th className='border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left'>タイトル</th>
+                        <th className='border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left'>内容</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className='bg-white dark:bg-slate-800'>
                     {todos.map((todo: TodoItem) => {
                         return (
                             <tr key={todo.id}>
-                                <td><Link href={`/todo/${encodeURIComponent(todo.id)}`} className="no-underline hover:underline text-cyan-600">{todo.title}</Link></td>
-                                <td>{todo.description}</td>
+                                <td className='border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400'><Link href={`/todo/${encodeURIComponent(todo.id)}`} className="no-underline hover:underline text-cyan-600">{todo.title}</Link></td>
+                                <td className='border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400'>{todo.description}</td>
                             </tr>
                         );
                     })}
