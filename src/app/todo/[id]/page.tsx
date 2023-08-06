@@ -1,6 +1,7 @@
 'use client'
 
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
 
 interface TodoItem {
     id: number,
@@ -8,32 +9,35 @@ interface TodoItem {
     description: string
 }
 
-async function getTodo(id: number) {
-    const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
-        cache: 'no-store'
-    });
-
-    if (!res.ok) {
-        throw new Error('データが取得できませんでした。');
-    }
-
-    return res.json();
-}
-
-async function deleteTodo(id: number) {
-    const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
-        method: 'DELETE'
-    });
-
-    if (!res.ok) {
-        throw new Error('データが削除できませんでした。');
-    }
-
-    return res.json();
-}
-
 export default async function Page({ params }: { params: { id: number } }) {
+    const router = useRouter();
     const todo = await getTodo(params.id);
+
+    async function getTodo(id: number) {
+        const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
+            cache: 'no-store'
+        });
+
+        if (!res.ok) {
+            throw new Error('データが取得できませんでした。');
+        }
+
+        return res.json();
+    }
+
+    async function deleteTodo(id: number) {
+        const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (!res.ok) {
+            throw new Error('データが削除できませんでした。');
+        }
+        
+        router.push('/todo');
+        router.refresh();
+    }
+
     return (
         <div>
             <div>

@@ -33,8 +33,7 @@ const DELETE = withApiAuthRequired(async (req, ctx) => {
     if (!res.ok) {
         throw new Error('データが削除できませんでした。');
     }
-    const data = await res.json();
-    return NextResponse.json(data);
+    return NextResponse.json({});
 });
 
 export { GET, DELETE };
