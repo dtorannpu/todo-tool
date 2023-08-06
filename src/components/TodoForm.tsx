@@ -1,6 +1,7 @@
 'use client';
 
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 interface IFormInput {
     title: string;
@@ -8,6 +9,7 @@ interface IFormInput {
 }
 
 const TodoForm = () => {
+    const router = useRouter();
     const { reset, register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
     const onSubmit: SubmitHandler<IFormInput> = async (data) => submit(data);
 
@@ -25,7 +27,7 @@ const TodoForm = () => {
         }
 
         reset();
-        window.location.reload();
+        router.refresh();
     }
 
     return (
