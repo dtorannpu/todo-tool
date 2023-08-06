@@ -1,9 +1,9 @@
-import { getAccessToken, withApiAuthRequired } from "@auth0/nextjs-auth0";
+import { getAccessToken } from "@auth0/nextjs-auth0";
 import { NextRequest, NextResponse } from "next/server";
 
-const POST = withApiAuthRequired(async (req: NextRequest) => {
+const POST = async (req: NextRequest) => {
     const { accessToken } = await getAccessToken();
-    const data  = await req.json();
+    const data = await req.json();
     const res = await fetch('http://localhost:8080/todos', {
         method: 'POST',
         headers: {
@@ -17,6 +17,6 @@ const POST = withApiAuthRequired(async (req: NextRequest) => {
         throw new Error('登録に失敗しました。');
     }
     return NextResponse.json({});
-});
+};
 
 export { POST };

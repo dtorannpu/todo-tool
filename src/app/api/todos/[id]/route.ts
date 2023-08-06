@@ -1,9 +1,9 @@
-import { getAccessToken, withApiAuthRequired } from "@auth0/nextjs-auth0";
-import { NextResponse } from "next/server";
+import { getAccessToken } from "@auth0/nextjs-auth0";
+import { NextRequest, NextResponse } from "next/server";
 
-const GET = withApiAuthRequired(async (req, ctx) => {
+const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
     const { accessToken } = await getAccessToken();
-    const id = ctx.params?.id;
+    const id = params.id;
     const res = await fetch(`http://localhost:8080/todos/${id}`, {
         method: 'GET',
         headers: {
@@ -17,11 +17,11 @@ const GET = withApiAuthRequired(async (req, ctx) => {
     }
     const data = await res.json();
     return NextResponse.json(data);
-});
+};
 
-const DELETE = withApiAuthRequired(async (req, ctx) => {
+const DELETE = async (req: NextRequest, { params }: { params: { id: string } }) => {
     const { accessToken } = await getAccessToken();
-    const id = ctx.params?.id;
+    const id = params.id;
     const res = await fetch(`http://localhost:8080/todos/${id}`, {
         method: 'DELETE',
         headers: {
@@ -34,12 +34,12 @@ const DELETE = withApiAuthRequired(async (req, ctx) => {
         throw new Error('データが削除できませんでした。');
     }
     return NextResponse.json({});
-});
+};
 
 
-const PUT = withApiAuthRequired(async (req, ctx) => {
+const PUT = async (req: NextRequest, { params }: { params: { id: string } }) => {
     const { accessToken } = await getAccessToken();
-    const id = ctx.params?.id;
+    const id = params.id;
     const data = await req.json();
     const res = await fetch(`http://localhost:8080/todos/${id}`, {
         method: 'PUT',
@@ -54,6 +54,6 @@ const PUT = withApiAuthRequired(async (req, ctx) => {
         throw new Error('データが更新できませんでした。');
     }
     return NextResponse.json({});
-});
+};
 
 export { GET, DELETE, PUT };
