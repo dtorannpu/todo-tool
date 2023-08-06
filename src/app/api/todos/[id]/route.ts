@@ -36,4 +36,24 @@ const DELETE = withApiAuthRequired(async (req, ctx) => {
     return NextResponse.json({});
 });
 
-export { GET, DELETE };
+
+const PUT = withApiAuthRequired(async (req, ctx) => {
+    const { accessToken } = await getAccessToken();
+    const id = ctx.params?.id;
+    const data = await req.json();
+    const res = await fetch(`http://localhost:8080/todos/${id}`, {
+        method: 'PUT',
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    });
+
+    if (!res.ok) {
+        throw new Error('データが更新できませんでした。');
+    }
+    return NextResponse.json({});
+});
+
+export { GET, DELETE, PUT };
