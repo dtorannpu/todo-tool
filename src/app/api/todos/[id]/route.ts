@@ -19,4 +19,22 @@ const GET = withApiAuthRequired(async (req, ctx) => {
     return NextResponse.json(data);
 });
 
-export { GET };
+const DELETE = withApiAuthRequired(async (req, ctx) => {
+    const { accessToken } = await getAccessToken();
+    const id = ctx.params?.id;
+    const res = await fetch(`http://localhost:8080/todos/${id}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json'
+        },
+    });
+
+    if (!res.ok) {
+        throw new Error('データが削除できませんでした。');
+    }
+    const data = await res.json();
+    return NextResponse.json(data);
+});
+
+export { GET, DELETE };

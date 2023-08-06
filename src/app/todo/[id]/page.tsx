@@ -10,7 +10,6 @@ interface TodoItem {
 
 async function getTodo(id: number) {
     const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
-        
         cache: 'no-store'
     });
 
@@ -22,7 +21,15 @@ async function getTodo(id: number) {
 }
 
 async function deleteTodo(id: number) {
+    const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
+        method: 'DELETE'
+    });
 
+    if (!res.ok) {
+        throw new Error('データが削除できませんでした。');
+    }
+
+    return res.json();
 }
 
 export default async function Page({ params }: { params: { id: number } }) {
