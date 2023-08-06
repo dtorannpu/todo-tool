@@ -16,7 +16,7 @@ interface Props {
 
 const UpdateTodoForm = ({ id, title, description }: Props) => {
     const router = useRouter();
-    const { reset, register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
+    const { register, handleSubmit, formState: { errors } } = useForm<IFormInput>({
         defaultValues: {
             title: title,
             description: description
