@@ -1,4 +1,4 @@
 import { TextDecoder, TextEncoder } from 'util';
 
-global.TextDecoder = TextDecoder;
-global.TextEncoder = TextEncoder;
+(global as any).TextEncoder = TextEncoder;
+(global as any).TextDecoder = TextDecoder;
