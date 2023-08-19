@@ -22,7 +22,7 @@ const UpdateTodoForm = ({ id, title, description }: Props) => {
             description: description
         }
     });
-    const onSubmit: SubmitHandler<IFormInput> = async (data) => submit(data, id);
+    const onSubmit: SubmitHandler<IFormInput> = async (data: IFormInput) => submit(data, id);
 
     async function submit(data: IFormInput, id: number) {
         const res = await fetch(`http://localhost:3000/api/todos/${id}`, {

@@ -11,7 +11,7 @@ interface IFormInput {
 const TodoForm = () => {
     const router = useRouter();
     const { reset, register, handleSubmit, formState: { errors } } = useForm<IFormInput>();
-    const onSubmit: SubmitHandler<IFormInput> = async (data) => submit(data);
+    const onSubmit: SubmitHandler<IFormInput> = async (data: IFormInput) => submit(data);
 
     async function submit(data: IFormInput) {
         const res = await fetch('http://localhost:3000/api/todos', {
