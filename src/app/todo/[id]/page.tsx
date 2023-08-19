@@ -2,16 +2,8 @@
 
 import UpdateTodoForm from "@/components/UpdateTodoForm";
 import Link from "next/link";
-import { useRouter } from 'next/navigation';
-
-interface TodoItem {
-    id: number,
-    title: string,
-    description: string
-}
 
 export default async function Page({ params }: { params: { id: number } }) {
-    const router = useRouter();
     const todo = await getTodo(params.id);
 
     async function getTodo(id: number) {
@@ -34,9 +26,7 @@ export default async function Page({ params }: { params: { id: number } }) {
         if (!res.ok) {
             throw new Error('データが削除できませんでした。');
         }
-
-        router.push('/todo');
-        router.refresh();
+        window.location.href = '/todo';
     }
 
     return (
