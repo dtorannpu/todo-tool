@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 
 interface IFormInput {
     title: string;
-    description: String
+    description: string
 }
 
 const TodoForm = () => {
