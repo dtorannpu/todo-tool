@@ -47,7 +47,7 @@ const TodoForm = () => {
                     {errors?.description?.type === 'maxLength' && <p className='text-red-600'>内容は1024文字以内で入力してください。</p>}
                 </div>
                 <div className='flex items-center justify-between'>
-                    <input type="submit" value="登録" data-testid="registerButton" disabled={!isValid} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
+                    <input type="submit" value="登録" data-testid="registerButton" disabled={!isValid} className="bg-blue-500 disabled:bg-blue-300 hover:enabled:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
                 </div>
             </form>
         </div>

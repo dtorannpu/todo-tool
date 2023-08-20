@@ -11,7 +11,7 @@ interface IFormInput {
 }
 
 export default function Page({ params }: { params: { id: number } }) {
-    const { register, handleSubmit, formState: { errors }, reset } = useForm<IFormInput>();
+    const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInput>();
 
     async function getTodo(id: number) {
         const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
@@ -79,7 +79,7 @@ export default function Page({ params }: { params: { id: number } }) {
                         {errors?.description?.type === 'maxLength' && <p className='text-red-600'>内容は1024文字以内で入力してください。</p>}
                     </div>
                     <div className='flex items-center justify-between'>
-                        <input type="submit" value="更新" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
+                        <input type="submit" value="更新" disabled={!isValid} className="bg-blue-500 disabled:bg-blue-300 hover:enabled:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
                     </div>
                 </form>
             </div>
