@@ -36,18 +36,18 @@ const TodoForm = () => {
             <form onSubmit={handleSubmit(onSubmit)} className='bg-white shadow-md px-8 pt-6 pb-8 mb-4'>
                 <div className='mb-4'>
                     <label htmlFor="title" className='block text-gray-700 text-sm font-bold mb-2'>タイトル:</label>
-                    <input data-testid="titleField" {...register("title", { required: true, maxLength: 128 })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                    <input data-testid="titleField" {...register("title", { required: true, maxLength: 128 })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight" />
                     {errors?.title?.type === 'required' && <p className='text-red-600'>必須です。</p>}
                     {errors?.title?.type === 'maxLength' && <p className='text-red-600'>タイトルは128文字以内で入力してください。</p>}
                 </div>
                 <div className='mb-4'>
                     <label htmlFor="description" className='block text-gray-700 text-sm font-bold mb-2'>内容:</label>
-                    <textarea data-testid="descriptionField" {...register("description", { required: true, maxLength: 1024 })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <textarea data-testid="descriptionField" {...register("description", { required: true, maxLength: 1024 })} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight"></textarea>
                     {errors?.description?.type === 'required' && <p className='text-red-600'>必須です。</p>}
                     {errors?.description?.type === 'maxLength' && <p className='text-red-600'>内容は1024文字以内で入力してください。</p>}
                 </div>
                 <div className='flex items-center justify-between'>
-                    <input type="submit" value="登録" data-testid="registerButton" disabled={!isValid} className="bg-blue-500 disabled:bg-blue-300 hover:enabled:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" />
+                    <input type="submit" value="登録" data-testid="registerButton" disabled={!isValid} className="bg-blue-500 disabled:bg-blue-300 hover:enabled:bg-blue-700 text-white font-bold py-2 px-4 rounded" />
                 </div>
             </form>
         </div>
