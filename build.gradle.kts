@@ -9,10 +9,10 @@ val mysql_version: String by project
 val swagger_codegen_version: String by project
 
 plugins {
-    kotlin("jvm") version "1.9.0"
-    id("io.ktor.plugin") version "2.3.3"
-    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
-    id("com.github.ben-manes.versions") version "0.47.0"
+    kotlin("jvm") version "1.9.10"
+    id("io.ktor.plugin") version "2.3.4"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.10"
+    id("com.github.ben-manes.versions") version "0.48.0"
 }
 
 group = "com.example"
