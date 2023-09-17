@@ -1,0 +1,13 @@
+ktor:
+    application:
+        modules:
+            - com.example.ApplicationKt.testModule
+    deployment:
+        port: 8080
+
+example:
+    db:
+        driverClassName: com.mysql.cj.jdbc.Driver
+        url: "jdbc:mysql://localhost/todo"
+        user: root
+        password: root

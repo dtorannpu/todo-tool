@@ -1,11 +1,6 @@
 package com.example
 
-import io.ktor.client.request.*
-import io.ktor.client.statement.*
-import io.ktor.server.testing.*
-import kotlin.test.*
-import io.ktor.http.*
-import com.example.plugins.*
+import kotlin.test.Test
 
 class ApplicationTest {
 //    @Test
@@ -20,6 +15,5 @@ class ApplicationTest {
 //    }
     @Test
     fun testRoot() {
-
     }
 }
