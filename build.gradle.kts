@@ -10,7 +10,7 @@ plugins {
     kotlin("jvm") version "1.9.20"
     id("io.ktor.plugin") version "2.3.6"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.20"
-    id("com.github.ben-manes.versions") version "0.49.0"
+    id("com.github.ben-manes.versions") version "0.50.0"
 }
 
 group = "com.example"
@@ -37,7 +37,6 @@ dependencies {
     implementation("io.ktor:ktor-server-auth-jwt:$ktor_version")
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
-    //implementation("com.h2database:h2:$h2_version")
     implementation("com.mysql:mysql-connector-j:$mysql_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
