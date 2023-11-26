@@ -5,12 +5,14 @@ val exposed_version: String by project
 val h2_version: String by project
 val mysql_version: String by project
 val swagger_codegen_version: String by project
+val koin_ktor: String by project
 
 plugins {
     kotlin("jvm") version "1.9.20"
     id("io.ktor.plugin") version "2.3.6"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.20"
     id("com.github.ben-manes.versions") version "0.50.0"
+    id("jacoco")
 }
 
 group = "com.example"
@@ -46,5 +48,17 @@ dependencies {
     implementation("io.swagger.codegen.v3:swagger-codegen-generators:$swagger_codegen_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("io.insert-koin:koin-ktor:$koin_ktor")
+    implementation("io.insert-koin:koin-logger-slf4j:$koin_ktor")
+    implementation("com.zaxxer:HikariCP:5.1.0")
+    testImplementation("com.h2database:h2:$h2_version")
+    testImplementation("io.insert-koin:koin-test:3.5.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    testImplementation("com.ninja-squad:DbSetup:2.1.0")
+    testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
+    testImplementation("io.ktor:ktor-server-test-host-jvm:2.3.6")
+    testImplementation("org.skyscreamer:jsonassert:1.5.1")
+    testImplementation("org.assertj:assertj-db:2.0.2")
 }
 

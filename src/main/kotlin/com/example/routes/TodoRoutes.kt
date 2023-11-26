@@ -1,6 +1,6 @@
 package com.example.routes
 
-import com.example.dao.dao
+import com.example.dao.TodoDao
 import com.example.models.CreateTodo
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -9,8 +9,10 @@ import io.ktor.server.auth.jwt.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.koin.ktor.ext.inject
 
 fun Route.todoRouting() {
+    val dao by inject<TodoDao>()
     authenticate("auth0") {
         route("/todos") {
             get {
@@ -33,7 +35,7 @@ fun Route.todoRouting() {
                 val principal = call.principal<JWTPrincipal>()
                 val userId = principal!!.payload.getClaim("sub").asString()
                 val requestTodo = call.receive<CreateTodo>()
-                dao.addNewTodo(userId, requestTodo.description!!, requestTodo.title!!)
+                dao.addNewTodo(userId, requestTodo.title!!, requestTodo.description!!)
                 call.respond(HttpStatusCode.Created)
             }
             put("{id}") {
