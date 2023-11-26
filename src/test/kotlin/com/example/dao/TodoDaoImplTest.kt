@@ -17,7 +17,7 @@ class TodoDaoImplTest {
 
     @BeforeTest
     fun setup() {
-        databaseFactory = DataBaseFactoryUnitTest();
+        databaseFactory = DataBaseFactoryUnitTest()
         databaseFactory.connect()
         todoDaoImpl = TodoDaoImpl()
     }
