@@ -1,9 +1,12 @@
 package com.example.plugins
 
 import com.auth0.jwk.JwkProviderBuilder
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.auth.jwt.*
+import io.ktor.server.application.Application
+import io.ktor.server.application.install
+import io.ktor.server.auth.Authentication
+import io.ktor.server.auth.jwt.JWTCredential
+import io.ktor.server.auth.jwt.JWTPrincipal
+import io.ktor.server.auth.jwt.jwt
 import java.util.concurrent.TimeUnit
 
 fun validateCreds(credential: JWTCredential): JWTPrincipal? {
@@ -17,10 +20,11 @@ fun validateCreds(credential: JWTCredential): JWTPrincipal? {
 }
 
 fun Application.configureJWT() {
-    val jwkProvider = JwkProviderBuilder(System.getenv("ISSUER"))
-        .cached(10, 24, TimeUnit.HOURS)
-        .rateLimited(10, 1, TimeUnit.MINUTES)
-        .build()
+    val jwkProvider =
+        JwkProviderBuilder(System.getenv("ISSUER"))
+            .cached(10, 24, TimeUnit.HOURS)
+            .rateLimited(10, 1, TimeUnit.MINUTES)
+            .build()
 
     install(Authentication) {
         jwt("auth0") {

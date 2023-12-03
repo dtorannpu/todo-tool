@@ -1,6 +1,6 @@
 package com.example.config
 
-import io.ktor.server.application.*
+import io.ktor.server.application.Application
 import org.koin.ktor.ext.inject
 
 class AppConfig {

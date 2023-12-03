@@ -7,6 +7,7 @@ import org.jetbrains.exposed.sql.Database
 
 class DatabaseFactoryImpl(appConfig: AppConfig) : DatabaseFactory {
     private val dbConfig = appConfig.databaseConfig
+
     override fun connect() {
         Database.connect(hikari())
     }
