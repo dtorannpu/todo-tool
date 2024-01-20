@@ -1,9 +1,13 @@
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
 import TodoForm from '@/components/TodoForm';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 
 describe('登録フォーム', () => {
+    afterEach(() => {
+        cleanup();
+    });
+
     it('レンダリングされるか', () => {
         render(<TodoForm />);
 
@@ -20,7 +24,9 @@ describe('登録フォーム', () => {
 
     it('タイトルのみ入力されている時', async () => {
         render(<TodoForm />);
-        await userEvent.type(screen.getByTestId('titleField'), 'タイトル');
+        
+        const user = userEvent.setup();
+        await user.type(screen.getByTestId('titleField'), 'タイトル');
 
         expect(screen.getByTestId('registerButton')).toBeDisabled();
     });
@@ -28,15 +34,19 @@ describe('登録フォーム', () => {
 
     it('内容のみ入力されている時', async () => {
         render(<TodoForm />);
-        await userEvent.type(screen.getByTestId('descriptionField'), '内容');
+
+        const user = userEvent.setup();
+        await user.type(screen.getByTestId('descriptionField'), '内容');
 
         expect(screen.getByTestId('registerButton')).toBeDisabled();
     });
 
     it('タイトルと内容が入力されている時', async () => {
         render(<TodoForm />);
-        await userEvent.type(screen.getByTestId('titleField'), 'タイトル');
-        await userEvent.type(screen.getByTestId('descriptionField'), '内容');
+
+        const user = userEvent.setup();
+        await user.type(screen.getByTestId('titleField'), 'タイトル');
+        await user.type(screen.getByTestId('descriptionField'), '内容');
 
         expect(screen.getByTestId('registerButton')).toBeEnabled();
     });
