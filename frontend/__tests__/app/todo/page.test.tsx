@@ -32,7 +32,7 @@ describe('Todo一覧', () => {
 
         expect(fetchMock).toHaveBeenCalledTimes(1);
         expect(fetchMock).toHaveBeenCalledWith(
-            'http://localhost:8080/todos',
+            'http://backend:8080/todos',
             {
                 cache: "no-store",
                 headers: {
