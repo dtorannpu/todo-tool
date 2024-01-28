@@ -1,0 +1,7 @@
+ktor:
+    database:
+        driverClassName: org.h2.Driver
+        jdbcUrl: "jdbc:h2:mem:test;DATABASE_TO_UPPER=false;MODE=MYSQL"
+        username: sa
+        password: secret
+        maximumPoolSize: 10
