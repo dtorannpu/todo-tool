@@ -6,7 +6,7 @@ ktor:
         port: 8080
     database:
         driverClassName: com.mysql.cj.jdbc.Driver
-        jdbcUrl: "jdbc:mysql://localhost/todo"
-        username: mysql
-        password: secret
+        jdbcUrl: $DATABASE_URL
+        username: $DATABASE_USER
+        password: $DATABASE_PASSWORD
         maximumPoolSize: 10

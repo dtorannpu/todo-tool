@@ -10,7 +10,7 @@ import io.ktor.server.auth.jwt.jwt
 import java.util.concurrent.TimeUnit
 
 fun validateCreds(credential: JWTCredential): JWTPrincipal? {
-    val containsAudience = credential.payload.audience.contains(System.getenv("AUDIENCE"))
+    val containsAudience = credential.payload.audience.contains(System.getenv("AUTH0_AUDIENCE"))
 
     if (containsAudience) {
         return JWTPrincipal(credential.payload)

@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 const POST = async (req: NextRequest) => {
     const { accessToken } = await getAccessToken();
     const data = await req.json();
-    const res = await fetch('http://localhost:8080/todos', {
+    const res = await fetch('http://backend:8080/todos', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${accessToken}`,

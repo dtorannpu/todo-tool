@@ -19,7 +19,7 @@ plugins {
 group = "com.example"
 version = "0.0.1"
 application {
-    mainClass.set("io.ktor.server.netty.EngineMain")
+    mainClass.set("com.example.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -61,4 +61,10 @@ dependencies {
     testImplementation("io.ktor:ktor-server-test-host-jvm:2.3.6")
     testImplementation("org.skyscreamer:jsonassert:1.5.1")
     testImplementation("org.assertj:assertj-db:2.0.2")
+}
+
+ktor {
+    fatJar {
+        archiveFileName.set("todo-service.jar")
+    }
 }

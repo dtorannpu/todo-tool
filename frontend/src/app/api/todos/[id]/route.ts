@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
     const { accessToken } = await getAccessToken();
     const id = params.id;
-    const res = await fetch(`http://localhost:8080/todos/${id}`, {
+    const res = await fetch(`http://backend:8080/todos/${id}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -22,7 +22,7 @@ const GET = async (req: NextRequest, { params }: { params: { id: string } }) => 
 const DELETE = async (req: NextRequest, { params }: { params: { id: string } }) => {
     const { accessToken } = await getAccessToken();
     const id = params.id;
-    const res = await fetch(`http://localhost:8080/todos/${id}`, {
+    const res = await fetch(`http://backend:8080/todos/${id}`, {
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -41,7 +41,7 @@ const PUT = async (req: NextRequest, { params }: { params: { id: string } }) => 
     const { accessToken } = await getAccessToken();
     const id = params.id;
     const data = await req.json();
-    const res = await fetch(`http://localhost:8080/todos/${id}`, {
+    const res = await fetch(`http://backend:8080/todos/${id}`, {
         method: 'PUT',
         headers: {
             Authorization: `Bearer ${accessToken}`,

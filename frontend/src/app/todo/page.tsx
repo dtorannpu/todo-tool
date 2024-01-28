@@ -11,7 +11,7 @@ interface TodoItem {
 
 async function getTodos() {
     const { accessToken } = await getAccessToken();
-    const res = await fetch('http://localhost:8080/todos', {
+    const res = await fetch('http://backend:8080/todos', {
         headers: {
             Authorization: `Bearer ${accessToken}`,
         },
