@@ -4,11 +4,9 @@ on:
   push:
     paths:
       - 'backend/**'
-      - '.github/workflows/backend_cl.yml'
   pull_request:
     paths:
       - 'backend/**'
-      - '.github/workflows/backend_cl.yml'
     branches:
       - 'main'
 
