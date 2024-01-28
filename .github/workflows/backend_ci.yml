@@ -1,9 +1,22 @@
-name: CI
-on: [pull_request]
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'backend/**'
+  pull_request:
+    paths:
+      - 'backend/**'
+    branches:
+      - 'main'
+
 jobs:
   tests:
     name: Run tests
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -13,6 +26,9 @@ jobs:
         distribution: 'adopt'
         java-version: '21'
         cache: 'gradle'
+        cache-dependency-path: |
+          ./backend/*.gradle*
+          ./backend/**/gradle-wrapper.properties
     - uses: gradle/wrapper-validation-action@v1
     - name: Make gradlew executable
       run: chmod +x ./gradlew
