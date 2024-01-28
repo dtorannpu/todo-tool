@@ -36,6 +36,6 @@
     "@vitest/coverage-v8": "^1.2.2",
     "cross-env": "7.0.3",
     "ts-node": "^10.9.2",
-    "vitest": "^1.2.1"
+    "vitest": "^1.2.2"
   }
 }
