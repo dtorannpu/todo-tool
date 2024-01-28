@@ -8,7 +8,7 @@ val swaggerCodegenVersion: String by project
 val koinKtor: String by project
 
 plugins {
-    kotlin("jvm") version "1.9.20"
+    kotlin("jvm") version "1.9.22"
     id("io.ktor.plugin") version "2.3.7"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.9.20"
     id("com.github.ben-manes.versions") version "0.50.0"
