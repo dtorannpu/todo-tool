@@ -9,8 +9,11 @@ import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.jwt.jwt
 import java.util.concurrent.TimeUnit
 
-fun validateCreds(credential: JWTCredential): JWTPrincipal? {
-    val containsAudience = credential.payload.audience.contains(System.getenv("AUTH0_AUDIENCE"))
+fun validateCredential(
+    credential: JWTCredential,
+    audience: String,
+): JWTPrincipal? {
+    val containsAudience = credential.payload.audience.contains(audience)
 
     if (containsAudience) {
         return JWTPrincipal(credential.payload)
@@ -20,16 +23,20 @@ fun validateCreds(credential: JWTCredential): JWTPrincipal? {
 }
 
 fun Application.configureJWT() {
+    val jwt = environment.config.config("jwt")
+    val audience = jwt.property("audience").getString()
+    val issuer = jwt.property("issuer").getString()
+
     val jwkProvider =
-        JwkProviderBuilder(System.getenv("ISSUER"))
+        JwkProviderBuilder(issuer)
             .cached(10, 24, TimeUnit.HOURS)
             .rateLimited(10, 1, TimeUnit.MINUTES)
             .build()
 
     install(Authentication) {
         jwt("auth0") {
-            verifier(jwkProvider, System.getenv("ISSUER"))
-            validate { credential -> validateCreds(credential) }
+            verifier(jwkProvider, issuer)
+            validate { credential -> validateCredential(credential, audience) }
         }
     }
 }

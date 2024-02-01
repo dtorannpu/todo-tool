@@ -10,3 +10,6 @@ ktor:
         username: $DATABASE_USER
         password: $DATABASE_PASSWORD
         maximumPoolSize: 10
+jwt:
+    issuer: $ISSUER
+    audience: $AUTH0_AUDIENCE
