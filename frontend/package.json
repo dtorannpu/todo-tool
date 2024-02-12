@@ -15,7 +15,7 @@
     "@auth0/nextjs-auth0": "^3.5.0",
     "@types/node": "^20.11.17",
     "@types/react": "^18.2.53",
-    "@types/react-dom": "^18.2.18",
+    "@types/react-dom": "^18.2.19",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
     "eslint-config-next": "^14.0.4",
