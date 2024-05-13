@@ -54,7 +54,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.1.0")
     testImplementation("com.h2database:h2:$h2Version")
     testImplementation("io.insert-koin:koin-test:3.5.6")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.0")
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     testImplementation("com.ninja-squad:DbSetup:2.1.0")
     testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
