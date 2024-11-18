@@ -51,7 +51,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
     implementation("io.insert-koin:koin-ktor:$koinKtor")
     implementation("io.insert-koin:koin-logger-slf4j:$koinKtor")
-    implementation("com.zaxxer:HikariCP:6.1.0")
+    implementation("com.zaxxer:HikariCP:6.2.0")
     testImplementation("com.h2database:h2:$h2Version")
     testImplementation("io.insert-koin:koin-test:4.0.0")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.9.0")
