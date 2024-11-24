@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { useEffect } from 'react';
+import { useEffect, use } from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
 
 
@@ -10,7 +10,8 @@ interface IFormInput {
     description: string;
 }
 
-export default function Page({ params }: { params: { id: number } }) {
+export default function Page(props: { params: Promise<{ id: number }> }) {
+    const params = use(props.params);
     const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IFormInput>();
 
     async function getTodo(id: number) {
