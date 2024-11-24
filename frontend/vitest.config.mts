@@ -1,15 +1,18 @@
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vitest/config";
+import react from "@vitejs/plugin-react";
+import dotenv from "dotenv";
+
+dotenv.config({ path: ".env.test" });
 
 export default defineConfig({
-    plugins: [react()],
-    test: {
-        environment: 'jsdom',
-        globals: true,
+  plugins: [react()],
+  test: {
+    environment: "jsdom",
+    globals: true,
+  },
+  resolve: {
+    alias: {
+      "@": __dirname + "/src",
     },
-    resolve: {
-        alias: {
-            '@': __dirname + '/src',
-        },
-    },
+  },
 });
