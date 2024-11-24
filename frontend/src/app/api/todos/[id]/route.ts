@@ -1,10 +1,8 @@
 import { getAccessToken } from "@auth0/nextjs-auth0";
 import { NextRequest, NextResponse } from "next/server";
 
-const GET = async (
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) => {
+const GET = async (req: NextRequest, props: { params: Promise<{ id: string }> }) => {
+  const params = await props.params;
   const { accessToken } = await getAccessToken();
   const id = params.id;
   const res = await fetch(`${process.env.API_URL}/todos/${id}`, {
