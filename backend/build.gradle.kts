@@ -60,7 +60,7 @@ dependencies {
     testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
     testImplementation("io.ktor:ktor-server-test-host-jvm:2.3.12")
     testImplementation("org.skyscreamer:jsonassert:1.5.3")
-    testImplementation("org.assertj:assertj-db:2.0.2")
+    testImplementation("org.assertj:assertj-db:3.0.0")
 }
 
 ktor {
