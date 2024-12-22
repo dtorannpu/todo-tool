@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/vitest";
 import Page from "@/app/todo/page";
-import * as auth0Exports from "@auth0/nextjs-auth0";
+import { auth0 } from "@/lib/auth0";
 
 describe("Todo一覧", () => {
   afterEach(() => {
@@ -9,9 +9,12 @@ describe("Todo一覧", () => {
   });
 
   it("一覧に取得したデータが表示される。", async () => {
-    const spy = vi
-      .spyOn(auth0Exports, "getAccessToken")
-      .mockImplementation(() => Promise.resolve<any>({ accessToken: "test" }));
+    const spy = vi.spyOn(auth0, "getAccessToken").mockImplementation(() =>
+      Promise.resolve<{
+        token: string;
+        expiresAt: number;
+      }>({ token: "test", expiresAt: 0 })
+    );
     const fetchMock = vi.spyOn(global, "fetch").mockImplementation(
       async () =>
         new Response(
@@ -45,9 +48,12 @@ describe("Todo一覧", () => {
   });
 
   it("エラー表示", async () => {
-    const spy = vi
-      .spyOn(auth0Exports, "getAccessToken")
-      .mockImplementation(() => Promise.resolve<any>({ accessToken: "test" }));
+    const spy = vi.spyOn(auth0, "getAccessToken").mockImplementation(() =>
+      Promise.resolve<{
+        token: string;
+        expiresAt: number;
+      }>({ token: "test", expiresAt: 0 })
+    );
 
     const fetchMock = vi.spyOn(global, "fetch").mockImplementation(
       async () =>

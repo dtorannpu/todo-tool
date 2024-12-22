@@ -1,6 +1,6 @@
 import Modal from "@/components/Modal";
 import TodoForm from "@/components/TodoForm";
-import { getAccessToken } from "@auth0/nextjs-auth0";
+import { auth0 } from "@/lib/auth0";
 import Link from "next/link";
 
 interface TodoItem {
@@ -10,12 +10,12 @@ interface TodoItem {
 }
 
 async function getTodos() {
-  const { accessToken } = await getAccessToken();
+  const { token } = await auth0.getAccessToken();
   const url = `${process.env.API_URL}/todos`;
   console.log(url);
   const res = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${token}`,
     },
     cache: "no-store",
   });

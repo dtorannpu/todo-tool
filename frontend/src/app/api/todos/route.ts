@@ -1,13 +1,13 @@
-import { getAccessToken } from "@auth0/nextjs-auth0";
+import { auth0 } from "@/lib/auth0";
 import { NextRequest, NextResponse } from "next/server";
 
 const POST = async (req: NextRequest) => {
-  const { accessToken } = await getAccessToken();
+  const { token } = await auth0.getAccessToken();
   const data = await req.json();
   const res = await fetch(`${process.env.API_URL}/todos`, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
