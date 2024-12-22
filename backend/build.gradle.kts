@@ -10,7 +10,7 @@ val koinKtor: String by project
 plugins {
     kotlin("jvm") version "2.1.0"
     id("io.ktor.plugin") version "2.3.12"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.0"
     id("com.github.ben-manes.versions") version "0.51.0"
     id("jacoco")
     id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
