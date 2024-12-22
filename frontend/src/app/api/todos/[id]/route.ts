@@ -25,10 +25,10 @@ const GET = async (
 
 const DELETE = async (
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   const { accessToken } = await getAccessToken();
-  const id = params.id;
+  const id = (await params).id;
   const res = await fetch(`${process.env.API_URL}/todos/${id}`, {
     method: "DELETE",
     headers: {
@@ -45,10 +45,10 @@ const DELETE = async (
 
 const PUT = async (
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) => {
   const { accessToken } = await getAccessToken();
-  const id = params.id;
+  const id = (await params).id;
   const data = await req.json();
   const res = await fetch(`${process.env.API_URL}/todos/${id}`, {
     method: "PUT",
