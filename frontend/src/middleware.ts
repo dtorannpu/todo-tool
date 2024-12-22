@@ -1,7 +1,10 @@
-import { withMiddlewareAuthRequired } from '@auth0/nextjs-auth0/edge';
+import { NextRequest } from "next/server";
+import { auth0 } from "./lib/auth0";
 
-export default withMiddlewareAuthRequired();
+export const middleware = async (request: NextRequest) => {
+  return await auth0.middleware(request);
+};
 
 export const config = {
-    matcher: ['/todo/:path*', '/api/todos/:path*'],
-}
+  matcher: ["/todo/:path*", "/api/todos/:path*"],
+};
