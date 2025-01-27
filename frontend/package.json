@@ -38,6 +38,6 @@
     "eslint-config-next": "^15.1.6",
     "tailwindcss": "^3.4.17",
     "autoprefixer": "^10.4.20",
-    "postcss": "^8.4.49"
+    "postcss": "^8.5.1"
   }
 }
