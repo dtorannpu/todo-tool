@@ -84,7 +84,7 @@ export default function Page(props: { params: Promise<{ id: number }> }) {
             </label>
             <input
               {...register("title", { required: true, maxLength: 128 })}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+              className="shadow-sm appearance-none border rounded-sm w-full py-2 px-3 text-gray-700 leading-tight"
             />
             {errors?.title?.type === "required" && (
               <p className="text-red-600">必須です。</p>
@@ -104,7 +104,7 @@ export default function Page(props: { params: Promise<{ id: number }> }) {
             </label>
             <textarea
               {...register("description", { required: true, maxLength: 1024 })}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+              className="shadow-sm appearance-none border rounded-sm w-full py-2 px-3 text-gray-700 leading-tight"
             ></textarea>
             {errors?.description?.type === "required" && (
               <p className="text-red-600">必須です。</p>
@@ -120,19 +120,19 @@ export default function Page(props: { params: Promise<{ id: number }> }) {
               type="submit"
               value="更新"
               disabled={!isValid}
-              className="bg-blue-500 disabled:bg-blue-300 hover:enabled:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-blue-500 disabled:bg-blue-300 hover:enabled:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm"
             />
           </div>
         </form>
       </div>
       <Link
         href="/todo"
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm"
       >
         戻る
       </Link>
       <button
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-sm"
         onClick={() => deleteTodo(params.id)}
       >
         削除
