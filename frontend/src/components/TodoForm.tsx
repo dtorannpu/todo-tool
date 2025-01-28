@@ -50,7 +50,7 @@ const TodoForm = () => {
           <input
             data-testid="titleField"
             {...register("title", { required: true, maxLength: 128 })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+            className="shadow-sm appearance-none border rounded-sm w-full py-2 px-3 text-gray-700 leading-tight"
           />
           {errors?.title?.type === "required" && (
             <p className="text-red-600">必須です。</p>
@@ -71,7 +71,7 @@ const TodoForm = () => {
           <textarea
             data-testid="descriptionField"
             {...register("description", { required: true, maxLength: 1024 })}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight"
+            className="shadow-sm appearance-none border rounded-sm w-full py-2 px-3 text-gray-700 leading-tight"
           ></textarea>
           {errors?.description?.type === "required" && (
             <p className="text-red-600">必須です。</p>
@@ -88,7 +88,7 @@ const TodoForm = () => {
             value="登録"
             data-testid="registerButton"
             disabled={!isValid}
-            className="bg-blue-500 disabled:bg-blue-300 hover:enabled:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-blue-500 disabled:bg-blue-300 hover:enabled:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm"
           />
         </div>
       </form>

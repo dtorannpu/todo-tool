@@ -8,8 +8,8 @@ const Header = () => {
   return (
     <header>
       <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
-        <div className="w-full block flex-grow lg:items-center lg:w-auto">
-          <div className="text-sm lg:flex-grow">
+        <div className="w-full block grow lg:items-center lg:w-auto">
+          <div className="text-sm lg:grow">
             <Link
               href="/todo"
               className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
