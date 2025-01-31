@@ -19,7 +19,7 @@ const Header = () => {
 
             {!isLoading && !user && (
               <a /* eslint-disable-line @next/next/no-html-link-for-pages */
-                href="/api/auth/login"
+                href="/auth/login"
                 className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
               >
                 ログイン
@@ -27,7 +27,7 @@ const Header = () => {
             )}
             {!isLoading && user && (
               <a /* eslint-disable-line @next/next/no-html-link-for-pages */
-                href="/api/auth/logout"
+                href="/auth/logout"
                 className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
               >
                 ログアウト

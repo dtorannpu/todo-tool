@@ -12,7 +12,6 @@ interface TodoItem {
 async function getTodos() {
   const { token } = await auth0.getAccessToken();
   const url = `${process.env.API_URL}/todos`;
-  console.log(url);
   const res = await fetch(url, {
     headers: {
       Authorization: `Bearer ${token}`,
