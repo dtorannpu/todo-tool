@@ -3,16 +3,14 @@ import { auth0 } from "./lib/auth0";
 
 export const middleware = async (request: NextRequest) => {
   const authRes = await auth0.middleware(request);
-
   if (request.nextUrl.pathname.startsWith("/auth")) {
     return authRes;
   }
 
-  const { origin } = new URL(request.url);
   const session = await auth0.getSession();
 
   if (!session) {
-    return NextResponse.redirect(`${origin}/auth/login`);
+    return NextResponse.redirect(`${process.env.APP_BASE_URL}/auth/login`);
   }
 
   return authRes;
@@ -26,6 +24,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+    "/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|$|/auth/.*).*)",
   ],
 };
