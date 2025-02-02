@@ -11,7 +11,7 @@ describe("Home", () => {
     render(<Home />);
     expect(screen.getByRole("link", { name: "ログイン" })).toHaveAttribute(
       "href",
-      "/auth/login?audience=http://localhost:8080"
+      "/auth/login?audience=http://localhost:8080&returnTo=/todo"
     );
   });
 });
