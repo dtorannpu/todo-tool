@@ -8,7 +8,8 @@ import com.ninja_squad.dbsetup.Operations.sequenceOf
 import com.ninja_squad.dbsetup.destination.DataSourceDestination
 import kotlinx.coroutines.test.runTest
 import org.assertj.db.api.Assertions
-import org.assertj.db.type.Changes
+import org.assertj.db.type.AssertDbConnection
+import org.assertj.db.type.AssertDbConnectionFactory
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
@@ -21,11 +22,13 @@ import kotlin.test.assertTrue
 class TodoDaoImplTest {
     private lateinit var databaseFactory: DataBaseFactoryUnitTest
     private lateinit var todoDaoImpl: TodoDaoImpl
+    private lateinit var assertDbConnection: AssertDbConnection
 
     @BeforeTest
     fun setup() {
         databaseFactory = DataBaseFactoryUnitTest()
         databaseFactory.connect()
+        assertDbConnection = AssertDbConnectionFactory.of(databaseFactory.source).create()
         todoDaoImpl = TodoDaoImpl()
     }
 
@@ -90,8 +93,7 @@ class TodoDaoImplTest {
     @Test
     fun testAddNewTodo() =
         runTest {
-            val changes = Changes(databaseFactory.source)
-            changes.setStartPointNow()
+            val changes = assertDbConnection.changes().build()
             val dbSetup =
                 DbSetup(
                     DataSourceDestination(databaseFactory.source),
@@ -105,22 +107,26 @@ class TodoDaoImplTest {
 
             assertEquals("title1", result!!.title)
             assertEquals("description1", result.description)
-            Assertions.assertThat(changes)
+            Assertions
+                .assertThat(changes)
                 .hasNumberOfChanges(1)
                 .ofCreationOnTable("todos")
                 .hasNumberOfChanges(1)
                 .changeOnTable("todos")
                 .isCreation()
                 .rowAtEndPoint()
-                .value("title").isEqualTo("title1")
-                .value("description").isEqualTo("description1")
-                .value("user_id").isEqualTo("test")
+                .value("title")
+                .isEqualTo("title1")
+                .value("description")
+                .isEqualTo("description1")
+                .value("user_id")
+                .isEqualTo("test")
         }
 
     @Test
     fun testEditTodoOk() =
         runTest {
-            val changes = Changes(databaseFactory.source)
+            val changes = assertDbConnection.changes().build()
             changes.setStartPointNow()
             val dbSetup =
                 DbSetup(
@@ -134,22 +140,26 @@ class TodoDaoImplTest {
             changes.setEndPointNow()
 
             assertTrue(result)
-            Assertions.assertThat(changes)
+            Assertions
+                .assertThat(changes)
                 .hasNumberOfChanges(1)
                 .ofModificationOnTable("todos")
                 .hasNumberOfChanges(1)
                 .changeOnTable("todos")
                 .isModification()
                 .rowAtEndPoint()
-                .value("id").isEqualTo(1)
-                .value("title").isEqualTo("title1change")
-                .value("description").isEqualTo("description1change")
+                .value("id")
+                .isEqualTo(1)
+                .value("title")
+                .isEqualTo("title1change")
+                .value("description")
+                .isEqualTo("description1change")
         }
 
     @Test
     fun testEditTodoNg() =
         runTest {
-            val changes = Changes(databaseFactory.source)
+            val changes = assertDbConnection.changes().build()
             changes.setStartPointNow()
             val dbSetup =
                 DbSetup(
@@ -163,14 +173,15 @@ class TodoDaoImplTest {
             changes.setEndPointNow()
 
             assertFalse(result)
-            Assertions.assertThat(changes)
+            Assertions
+                .assertThat(changes)
                 .hasNumberOfChanges(0)
         }
 
     @Test
     fun testDeleteTodoOk() =
         runTest {
-            val changes = Changes(databaseFactory.source)
+            val changes = assertDbConnection.changes().build()
             changes.setStartPointNow()
             val dbSetup =
                 DbSetup(
@@ -184,20 +195,22 @@ class TodoDaoImplTest {
             changes.setEndPointNow()
 
             assertTrue(result)
-            Assertions.assertThat(changes)
+            Assertions
+                .assertThat(changes)
                 .hasNumberOfChanges(1)
                 .ofDeletionOnTable("todos")
                 .hasNumberOfChanges(1)
                 .changeOnTable("todos")
                 .isDeletion()
                 .rowAtStartPoint()
-                .value("id").isEqualTo(1)
+                .value("id")
+                .isEqualTo(1)
         }
 
     @Test
     fun testDeleteTodoNg() =
         runTest {
-            val changes = Changes(databaseFactory.source)
+            val changes = assertDbConnection.changes().build()
             changes.setStartPointNow()
             val dbSetup =
                 DbSetup(
@@ -211,7 +224,8 @@ class TodoDaoImplTest {
             changes.setEndPointNow()
 
             assertFalse(result)
-            Assertions.assertThat(changes)
+            Assertions
+                .assertThat(changes)
                 .hasNumberOfChanges(0)
         }
 }
