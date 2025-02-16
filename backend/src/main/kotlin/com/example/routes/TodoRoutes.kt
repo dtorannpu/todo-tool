@@ -3,7 +3,6 @@ package com.example.routes
 import com.example.dao.TodoDao
 import com.example.models.CreateTodo
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.call
 import io.ktor.server.auth.authenticate
 import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.principal
