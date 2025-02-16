@@ -1,19 +1,10 @@
-val ktorVersion: String by project
-val kotlinVersion: String by project
-val logbackVersion: String by project
-val exposedVersion: String by project
-val h2Version: String by project
-val mysqlVersion: String by project
-val swaggerCodegenVersion: String by project
-val koinKtor: String by project
-
 plugins {
-    kotlin("jvm") version "2.1.10"
-    id("io.ktor.plugin") version "2.3.12"
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.1.10"
-    id("com.github.ben-manes.versions") version "0.52.0"
-    id("jacoco")
-    id("org.jlleitschuh.gradle.ktlint") version "12.1.2"
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ktor.plugin)
+    alias(libs.plugins.kotlin.plugin.serialization)
+    alias(libs.plugins.ben.manes.versions)
+    alias(libs.plugins.jacoco)
+    alias(libs.plugins.gradle.ktlint)
 }
 
 group = "com.example"
@@ -30,36 +21,36 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-cors:$ktorVersion")
-    implementation("io.ktor:ktor-server-core:$ktorVersion")
-    implementation("io.ktor:ktor-server-netty:$ktorVersion")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-    implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
-    implementation("io.ktor:ktor-server-request-validation:$ktorVersion")
-    implementation("io.ktor:ktor-server-status-pages:$ktorVersion")
-    implementation("io.ktor:ktor-server-auth:$ktorVersion")
-    implementation("io.ktor:ktor-server-auth-jwt:$ktorVersion")
-    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
-    implementation("com.mysql:mysql-connector-j:$mysqlVersion")
-    implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("io.ktor:ktor-server-config-yaml:$ktorVersion")
-    implementation("io.ktor:ktor-server-swagger:$ktorVersion")
-    implementation("io.ktor:ktor-server-openapi:$ktorVersion")
-    implementation("io.swagger.codegen.v3:swagger-codegen-generators:$swaggerCodegenVersion")
-    implementation("io.insert-koin:koin-ktor3:$koinKtor")
-    implementation("io.insert-koin:koin-logger-slf4j:$koinKtor")
-    implementation("com.zaxxer:HikariCP:6.2.1")
-    testImplementation("com.h2database:h2:$h2Version")
-    testImplementation("io.insert-koin:koin-test:$koinKtor")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.1")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    testImplementation("com.ninja-squad:DbSetup:2.1.0")
-    testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
-    testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:$kotlinVersion")
-    testImplementation("org.skyscreamer:jsonassert:1.5.3")
-    testImplementation("org.assertj:assertj-db:3.0.0")
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
+    implementation(libs.hikari.cp)
+    implementation(libs.koin.ktor3)
+    implementation(libs.koin.logger.slf4j)
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.ktor.server.auth.jwt)
+    implementation(libs.ktor.server.auth)
+    implementation(libs.ktor.server.config.yaml)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.server.core)
+    implementation(libs.ktor.server.cors)
+    implementation(libs.ktor.server.netty)
+    implementation(libs.ktor.server.openapi)
+    implementation(libs.ktor.server.request.validation)
+    implementation(libs.ktor.server.status.pages)
+    implementation(libs.ktor.server.swagger)
+    implementation(libs.logback.classic)
+    implementation(libs.mysql.connector.j)
+    implementation(libs.swagger.codegen.generators)
+    testImplementation(libs.assertj.db)
+    testImplementation(libs.db.setup.kotlin)
+    testImplementation(libs.db.setup)
+    testImplementation(libs.h2)
+    testImplementation(libs.jsonassert)
+    testImplementation(libs.koin.test)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.ktor.server.test.host)
 }
 
 ktor {
