@@ -30,6 +30,7 @@ import io.ktor.http.contentType
 import io.ktor.http.withCharset
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.install
+import io.ktor.server.config.ApplicationConfig
 import io.ktor.server.testing.testApplication
 import org.assertj.db.api.Assertions.assertThat
 import org.assertj.db.type.AssertDbConnection
@@ -59,6 +60,10 @@ class TodoRoutesKtTest {
     @Test
     fun testGetAllTodo() =
         testApplication {
+            environment {
+                config = ApplicationConfig("application.yaml")
+            }
+
             application {
                 install(Koin) {
                     slf4jLogger()
@@ -81,8 +86,7 @@ class TodoRoutesKtTest {
                     )
                 dbSetup.launch()
             }
-            application {
-            }
+
             client
                 .get("/todos") {
                     headers {
@@ -107,6 +111,10 @@ class TodoRoutesKtTest {
     @Test
     fun testGetTodo() =
         testApplication {
+            environment {
+                config = ApplicationConfig("application.yaml")
+            }
+
             application {
                 install(Koin) {
                     slf4jLogger()
@@ -146,6 +154,10 @@ class TodoRoutesKtTest {
     @Test
     fun testGetTodoNotFound() =
         testApplication {
+            environment {
+                config = ApplicationConfig("application.yaml")
+            }
+
             application {
                 install(Koin) {
                     slf4jLogger()
@@ -182,6 +194,10 @@ class TodoRoutesKtTest {
     @Test
     fun testCreateTodo() =
         testApplication {
+            environment {
+                config = ApplicationConfig("application.yaml")
+            }
+
             application {
                 install(Koin) {
                     slf4jLogger()
@@ -250,6 +266,10 @@ class TodoRoutesKtTest {
     @Test
     fun testUpdateTodo() =
         testApplication {
+            environment {
+                config = ApplicationConfig("application.yaml")
+            }
+
             application {
                 install(Koin) {
                     slf4jLogger()
@@ -317,6 +337,10 @@ class TodoRoutesKtTest {
     @Test
     fun testDeleteTodo() =
         testApplication {
+            environment {
+                config = ApplicationConfig("application.yaml")
+            }
+
             application {
                 install(Koin) {
                     slf4jLogger()

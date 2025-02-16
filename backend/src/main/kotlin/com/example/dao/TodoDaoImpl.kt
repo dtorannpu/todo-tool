@@ -8,7 +8,7 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.update
 
 class TodoDaoImpl : TodoDao {
@@ -21,7 +21,7 @@ class TodoDaoImpl : TodoDao {
 
     override suspend fun allTodos(userId: String): List<Todo> =
         dbQuery {
-            Todos.select { Todos.userId eq userId }.map(::resultRowToTodo)
+            Todos.selectAll().where { Todos.userId eq userId }.map(::resultRowToTodo)
         }
 
     override suspend fun todo(
@@ -30,7 +30,8 @@ class TodoDaoImpl : TodoDao {
     ): Todo? =
         dbQuery {
             Todos
-                .select { (Todos.id eq id) and (Todos.userId eq userId) }
+                .selectAll()
+                .where { (Todos.id eq id) and (Todos.userId eq userId) }
                 .map(::resultRowToTodo)
                 .singleOrNull()
         }
