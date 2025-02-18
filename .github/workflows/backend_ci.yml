@@ -29,5 +29,3 @@ jobs:
         run: chmod +x ./gradlew
       - name: Check
         run: ./gradlew check
-      - name: Run test
-        run: ./gradlew test
