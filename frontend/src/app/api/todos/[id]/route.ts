@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 const GET = async (
   req: NextRequest,
-  props: { params: Promise<{ id: string }> }
+  props: { params: Promise<{ id: string }> },
 ) => {
   const params = await props.params;
   const { token } = await auth0.getAccessToken();
@@ -25,7 +25,7 @@ const GET = async (
 
 const DELETE = async (
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) => {
   const { token } = await auth0.getAccessToken();
   const id = (await params).id;
@@ -45,7 +45,7 @@ const DELETE = async (
 
 const PUT = async (
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) => {
   const { token } = await auth0.getAccessToken();
   const id = (await params).id;
