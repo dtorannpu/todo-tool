@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        distribution: ["temurin"]
-        java-version: ["21", "24"]
+        distribution: [ "temurin" ]
+        java-version: [ "21", "24" ]
     defaults:
       run:
         working-directory: ./backend
