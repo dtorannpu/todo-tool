@@ -5,7 +5,7 @@ exposed = "0.61.0"
 h2 = "2.3.232"
 hikari-cp = "6.3.0"
 jsonassert = "1.5.3"
-koin-ktor = "4.1.0-Beta8"
+koin-ktor = "4.1.0"
 kotlin = "2.1.21"
 kotlinx-coroutines-test = "1.10.2"
 ktor = "3.2.0"
@@ -26,7 +26,7 @@ exposed-jdbc = { group = "org.jetbrains.exposed", name = "exposed-jdbc", version
 h2 = { group = "com.h2database", name = "h2", version.ref = "h2" }
 hikari-cp = { group = "com.zaxxer", name = "HikariCP", version.ref = "hikari-cp" }
 jsonassert = { group = "org.skyscreamer", name = "jsonassert", version.ref = "jsonassert" }
-koin-ktor3 = { group = "io.insert-koin", name = "koin-ktor3", version.ref = "koin-ktor" }
+koin-ktor = { group = "io.insert-koin", name = "koin-ktor", version.ref = "koin-ktor" }
 koin-logger-slf4j = { group = "io.insert-koin", name = "koin-logger-slf4j", version.ref = "koin-ktor" }
 koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koin-ktor" }
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
