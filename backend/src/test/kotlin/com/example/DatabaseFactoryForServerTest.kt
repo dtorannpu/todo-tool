@@ -6,7 +6,9 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
 
-class DatabaseFactoryForServerTest(appConfig: AppConfig) : DatabaseFactory {
+class DatabaseFactoryForServerTest(
+    appConfig: AppConfig,
+) : DatabaseFactory {
     private val dbConfig = appConfig.databaseConfig
 
     override fun connect() {
