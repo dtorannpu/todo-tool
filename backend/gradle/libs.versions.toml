@@ -13,7 +13,7 @@ logback = "1.5.18"
 mysql = "9.3.0"
 swagger-codegen-generators = "1.0.57"
 
-ktor-plugin = "3.2.1"
+ktor-plugin = "3.2.2"
 ben-manes-versions = "0.52.0"
 gradle-ktlint = "13.0.0"
 
