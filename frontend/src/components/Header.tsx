@@ -18,7 +18,7 @@ const Header = () => {
             </Link>
 
             {!isLoading && !user && (
-              <a /* eslint-disable-line @next/next/no-html-link-for-pages */
+              <a
                 href="/auth/login"
                 className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
               >
@@ -26,7 +26,7 @@ const Header = () => {
               </a>
             )}
             {!isLoading && user && (
-              <a /* eslint-disable-line @next/next/no-html-link-for-pages */
+              <a
                 href="/auth/logout"
                 className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
               >
