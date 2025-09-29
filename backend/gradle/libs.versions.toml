@@ -14,7 +14,7 @@ mysql = "9.4.0"
 swagger-codegen-generators = "1.0.57"
 
 ktor-plugin = "3.3.0"
-ben-manes-versions = "0.52.0"
+ben-manes-versions = "0.53.0"
 gradle-ktlint = "13.1.0"
 
 [libraries]
