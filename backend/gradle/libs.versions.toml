@@ -11,7 +11,7 @@ kotlinx-coroutines-test = "1.10.2"
 ktor = "3.3.0"
 logback = "1.5.19"
 mysql = "9.4.0"
-swagger-codegen-generators = "1.0.57"
+swagger-codegen-generators = "1.0.58"
 
 ktor-plugin = "3.3.0"
 ben-manes-versions = "0.53.0"
