@@ -3,14 +3,20 @@ import { auth0 } from "./lib/auth0";
 
 export const middleware = async (request: NextRequest) => {
   const authRes = await auth0.middleware(request);
+
   if (request.nextUrl.pathname.startsWith("/auth")) {
     return authRes;
   }
 
-  const session = await auth0.getSession();
+  if (request.nextUrl.pathname === "/") {
+    return authRes;
+  }
+
+  const { origin } = new URL(request.url);
+  const session = await auth0.getSession(request);
 
   if (!session) {
-    return NextResponse.redirect(`${process.env.APP_BASE_URL}/auth/login`);
+    return NextResponse.redirect(`${origin}/auth/login`);
   }
 
   return authRes;
