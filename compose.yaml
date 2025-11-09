@@ -16,7 +16,7 @@ services:
       AUTH0_DOMAIN: ${AUTH0_DOMAIN}
       API_URL: ${API_URL}
     ports:
-      - 3000:3000
+      - "3000:3000"
   backend:
     build:
       context: ./backend
