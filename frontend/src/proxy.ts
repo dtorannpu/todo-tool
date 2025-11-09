@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth0 } from "./lib/auth0";
 
-export const middleware = async (request: NextRequest) => {
+export const proxy = async (request: NextRequest) => {
   const authRes = await auth0.middleware(request);
 
   if (request.nextUrl.pathname.startsWith("/auth")) {
@@ -13,7 +13,7 @@ export const middleware = async (request: NextRequest) => {
   }
 
   const { origin } = new URL(request.url);
-  const session = await auth0.getSession(request);
+  const session = await auth0.getSession();
 
   if (!session) {
     return NextResponse.redirect(`${origin}/auth/login`);
