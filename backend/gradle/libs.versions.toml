@@ -15,7 +15,7 @@ swagger-codegen-generators = "1.0.59"
 
 ktor-plugin = "3.3.2"
 ben-manes-versions = "0.53.0"
-gradle-ktlint = "13.1.0"
+gradle-ktlint = "14.0.1"
 
 [libraries]
 assertj-db = { group = "org.assertj", name = "assertj-db", version.ref = "assertj-db" }
