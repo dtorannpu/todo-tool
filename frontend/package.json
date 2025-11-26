@@ -41,12 +41,5 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "vitest": "^4.0.13"
-  },
-  "overrides": {
-    "@types/react": "19.2.2",
-    "@types/react-dom": "19.2.2",
-    "@auth0/nextjs-auth0": {
-      "next": "16.0.1"
-    }
   }
 }
