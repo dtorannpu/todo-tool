@@ -4,11 +4,17 @@ updates:
     directory: "/frontend/"
     schedule:
       interval: "weekly"
+    assignees:
+      - "dtorannpu"
   - package-ecosystem: "gradle"
     directory: "/backend/"
     schedule:
       interval: "weekly"
+    assignees:
+      - "dtorannpu"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    assignees:
+      - "dtorannpu"
