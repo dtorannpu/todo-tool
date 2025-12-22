@@ -1,5 +1,5 @@
 [versions]
-assertj-db = "3.0.0"
+assertj-db = "3.0.1"
 db-setup = "2.1.0"
 exposed = "0.61.0"
 h2 = "2.4.240"
