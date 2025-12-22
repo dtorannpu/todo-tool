@@ -15,7 +15,7 @@
   "dependencies": {
     "@auth0/nextjs-auth0": "^4.13.3",
     "dotenv": "17.2.3",
-    "next": "16.0.10",
+    "next": "16.1.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-hook-form": "7.69.0"
