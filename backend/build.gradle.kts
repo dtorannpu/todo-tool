@@ -12,7 +12,7 @@ plugins {
 group = "com.example"
 version = "0.0.1"
 
-val javaVersion = System.getenv("JAVA_VERSION") ?: "21"
+val javaVersion = System.getenv("JAVA_VERSION") ?: "25"
 
 java {
     toolchain {
