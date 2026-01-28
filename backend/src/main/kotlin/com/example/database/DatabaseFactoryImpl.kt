@@ -3,7 +3,7 @@ package com.example.database
 import com.example.config.AppConfig
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.v1.jdbc.Database
 
 class DatabaseFactoryImpl(
     appConfig: AppConfig,
