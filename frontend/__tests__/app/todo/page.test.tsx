@@ -13,7 +13,7 @@ describe("Todo一覧", () => {
       Promise.resolve<{
         token: string;
         expiresAt: number;
-      }>({ token: "test", expiresAt: 0 })
+      }>({ token: "test", expiresAt: 0 }),
     );
     const fetchMock = vi.spyOn(global, "fetch").mockImplementation(
       async () =>
@@ -28,10 +28,10 @@ describe("Todo一覧", () => {
                         "title": "テスト2"
                     }
                 ]`,
-          { status: 200 }
-        )
+          { status: 200 },
+        ),
     );
-    const b = render(await Page());
+    render(await Page());
 
     expect(spy).toHaveBeenCalled();
 
@@ -48,14 +48,14 @@ describe("Todo一覧", () => {
   });
 
   it("エラー表示", async () => {
-    const spy = vi.spyOn(auth0, "getAccessToken").mockImplementation(() =>
+    vi.spyOn(auth0, "getAccessToken").mockImplementation(() =>
       Promise.resolve<{
         token: string;
         expiresAt: number;
-      }>({ token: "test", expiresAt: 0 })
+      }>({ token: "test", expiresAt: 0 }),
     );
 
-    const fetchMock = vi.spyOn(global, "fetch").mockImplementation(
+    vi.spyOn(global, "fetch").mockImplementation(
       async () =>
         new Response(
           `[
@@ -68,8 +68,8 @@ describe("Todo一覧", () => {
                     title: 'テスト2'
                 }
             ]`,
-          { status: 400 }
-        )
+          { status: 400 },
+        ),
     );
     await expect(async () => {
       render(await Page());
