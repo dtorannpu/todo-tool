@@ -1,9 +1,10 @@
-FROM gradle:8.13.0-jdk21 AS build
+FROM gradle:9.3.1-jdk25 AS build
 COPY --chown=gradle:gradle . /home/gradle/src
 WORKDIR /home/gradle/src
 RUN gradle buildFatJar --no-daemon
 
-FROM openjdk:21
+
+FROM amazoncorretto:25
 EXPOSE 8080:8080
 RUN mkdir /app
 COPY --from=build /home/gradle/src/build/libs/*.jar /app/todo-service.jar
