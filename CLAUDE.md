@@ -4,91 +4,81 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-A full-stack Todo application using Next.js (frontend) and Ktor/Kotlin (backend) with Auth0 for authentication and MySQL for persistence. All services run via Docker Compose.
+Full-stack Todo application with a Next.js frontend and Ktor/Kotlin backend, connected via Auth0 for authentication.
 
 ## Commands
 
-### Running the Application
+### Frontend (`/frontend`)
 
 ```bash
-# Start all services (requires .env.local from .env.example)
-docker compose --env-file .env.local up
+pnpm dev              # Dev server
+pnpm build            # Production build
+pnpm lint             # ESLint
+pnpm format           # Prettier
+pnpm test             # Run tests once (Vitest)
+pnpm test:watch       # Watch mode
+pnpm test:coverage    # Coverage report
 ```
 
-### Frontend (`frontend/`)
+### Backend (`/backend`)
 
 ```bash
-npm run dev          # Dev server with Turbopack + Node inspect
-npm run build        # Production build
-npm run lint         # ESLint
-npm run format       # Prettier format
-npm test             # Vitest (single run)
-npm run test:watch   # Vitest watch mode
-npm run test:coverage
+./gradlew check                              # Tests + ktlint (used in CI)
+./gradlew test                               # Tests only
+./gradlew ktlintCheck                        # Lint only
+./gradlew buildFatJar                        # Build deployable JAR
+./gradlew test --tests "com.example.ClassName.methodName"  # Single test
 ```
 
-### Backend (`backend/`)
+### Full Stack
 
 ```bash
-./gradlew check          # Run all checks: tests + ktlint
-./gradlew test           # Tests only
-./gradlew ktlintCheck    # Lint only
-./gradlew buildFatJar    # Build todo-service.jar
-```
-
-To run a single backend test class:
-```bash
-./gradlew test --tests "com.example.SomeTestClass"
+docker compose --env-file .env.local up      # Start all services (frontend, backend, MySQL)
 ```
 
 ## Architecture
 
-### Request Flow
+### Authentication Flow (Token Broker Pattern)
 
-```
-Browser → Next.js Frontend (port 3000)
-         → Next.js API Routes (/api/todos/*)    # token broker
-         → Ktor Backend (port 8080)             # JWT verification
-         → MySQL Database
-```
+The Next.js frontend never exposes Auth0 tokens to the browser. Instead:
 
-The Next.js API routes act as a **token broker**: they call `auth0.getAccessToken()` server-side and forward requests to the Ktor backend with an `Authorization: Bearer <token>` header. This keeps Auth0 tokens out of the browser.
+1. Browser calls Next.js API routes (e.g., `GET /api/todos`)
+2. Next.js API route calls `auth0.getAccessToken()` server-side
+3. Next.js forwards the request to the Ktor backend with a `Bearer` token
+4. Ktor verifies the JWT and extracts `sub` as `user_id`
+5. All DB queries filter by `user_id` for per-user data isolation
 
-### Authentication
+### Backend Structure (`/backend/src/main/kotlin/com/example/`)
 
-Auth0 is the identity provider. The middleware in [frontend/src/proxy.ts](frontend/src/proxy.ts) protects all routes except `/auth/*` and static assets. Auth0's `nextjs-auth0` SDK manages sessions on the frontend.
+- `plugins/` — Ktor plugins: JWT auth, CORS, routing, serialization, dependency injection setup
+- `routes/` — HTTP endpoints (Todo CRUD)
+- `dao/` — Database access objects using Exposed ORM with `suspendTransaction`
+- `database/` — DB connection factory (MySQL via Exposed)
+- `models/` — Data classes for requests/responses
+- `config/` — AppConfig loaded from `application.yaml`
+- `di/` — Koin DI module definitions (AppConfig as singleton; DatabaseFactory, TodoDao as factories)
 
-The Ktor backend ([backend/src/main/kotlin/com/example/plugins/JWT.kt](backend/src/main/kotlin/com/example/plugins/JWT.kt)) verifies JWTs by fetching Auth0's JWK set. It extracts the user identity from the JWT `sub` claim and passes it to the DAO layer to enforce per-user data isolation.
+### Frontend Structure (`/frontend/src/`)
 
-### Backend Structure (Ktor + Koin DI)
+- `app/` — Next.js App Router pages and API route handlers (the token broker lives here)
+- `components/` — React components (forms, todo list, etc.)
+- `lib/` — Auth0 client/server config utilities
 
-- **Entry point**: [Application.kt](backend/src/main/kotlin/com/example/Application.kt) — installs Koin, connects DB, registers plugins and routes
-- **DI**: [di/AppModule.kt](backend/src/main/kotlin/com/example/di/AppModule.kt) — `AppConfig` (singleton), `DatabaseFactory`, `TodoDao` (factories)
-- **Plugins**: `plugins/` — JWT auth, CORS/HTTP, serialization (Kotlinx), request validation, status pages
-- **Routes**: [routes/TodoRoutes.kt](backend/src/main/kotlin/com/example/routes/TodoRoutes.kt) — all `/todos` endpoints wrapped in `authenticate("auth0")`
-- **DAO**: [dao/TodoDaoImpl.kt](backend/src/main/kotlin/com/example/dao/TodoDaoImpl.kt) — Exposed ORM, all queries filter by `user_id`
-- **Models**: [models/Todo.kt](backend/src/main/kotlin/com/example/models/Todo.kt) — `Todo`, `CreateTodo` (Kotlinx Serializable), `Todos` (Exposed Table)
+### Database
 
-Database operations use `suspendTransaction` via [dao/DbQuery.kt](backend/src/main/kotlin/com/example/dao/DbQuery.kt) for coroutine compatibility.
+Single `todos` table: `id` (PK), `title` (varchar 128), `description` (varchar 1024), `user_id` (varchar 256, indexed).
 
-### Frontend Structure (Next.js App Router)
+### Tech Stack
 
-- **Middleware**: [src/proxy.ts](frontend/src/proxy.ts) — auth guard for all routes
-- **Auth client**: [src/lib/auth0.ts](frontend/src/lib/auth0.ts) — Auth0 client config, redirects to `/todo` post-login
-- **Pages**: `app/page.tsx` (landing), `app/todo/page.tsx` (list, server component), `app/todo/[id]/page.tsx` (detail, client component with React Hook Form)
-- **API routes**: `app/api/todos/` — proxy to backend, adding Auth0 bearer token
-- **Forms**: [src/components/TodoForm.tsx](frontend/src/components/TodoForm.tsx) — React Hook Form with client-side validation matching backend constraints (title ≤128, description ≤1024)
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 16, React 19, Tailwind CSS 4, React Hook Form |
+| Auth | Auth0 (`@auth0/nextjs-auth0`) |
+| Backend | Ktor 3, Kotlin, Koin DI, Exposed ORM |
+| Database | MySQL 8.0 |
+| Testing | Vitest + Testing Library (frontend), JUnit (backend) |
+| Package manager | pnpm (frontend), Gradle (backend) |
 
-### Database Schema
+## Environment Setup
 
-Single `todos` table: `id` (PK auto-increment), `title` (varchar 128), `description` (varchar 1024), `user_id` (varchar 256, indexed).
-
-### Environment Variables
-
-Copy `.env.example` to `.env.local`. Required variables:
-- `AUTH0_SECRET`, `AUTH0_ISSUER_BASE_URL`, `AUTH0_CLIENT_ID`, `AUTH0_CLIENT_SECRET`, `AUTH0_AUDIENCE`, `AUTH0_DOMAIN`
-- `APP_BASE_URL` — frontend URL
-- `API_URL` — backend URL (used server-side in Next.js)
-- `DATABASE_URL`, `DATABASE_USER`, `DATABASE_PASSWORD`
-
-Auth0 setup requires a Regular Web Application with callback URL `{APP_BASE_URL}/auth/callback` and logout URL `{APP_BASE_URL}`.
+Copy `.env.example` to `.env.local` and fill in Auth0 credentials and database connection info before running locally or with Docker Compose.
