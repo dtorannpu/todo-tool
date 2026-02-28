@@ -21,7 +21,7 @@ export default function Page(props: { params: Promise<{ id: number }> }) {
   } = useForm<IFormInput>();
 
   async function getTodo(id: number) {
-    const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
+    const res = await fetch(`/api/todos/${id}`, {
       cache: "no-store",
     });
 
@@ -45,7 +45,7 @@ export default function Page(props: { params: Promise<{ id: number }> }) {
     submit(data, params.id);
 
   async function submit(data: IFormInput, id: number) {
-    const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
+    const res = await fetch(`/api/todos/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default function Page(props: { params: Promise<{ id: number }> }) {
   }
 
   async function deleteTodo(id: number | null) {
-    const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
+    const res = await fetch(`/api/todos/${id}`, {
       method: "DELETE",
     });
 
