@@ -9,11 +9,14 @@ import io.ktor.server.auth.jwt.JWTPrincipal
 import io.ktor.server.auth.jwt.jwt
 import java.util.concurrent.TimeUnit
 
+private val logger = org.slf4j.LoggerFactory.getLogger("com.example.plugins.JWT")
+
 fun validateCredential(
     credential: JWTCredential,
     audience: String,
 ): JWTPrincipal? {
     val containsAudience = credential.payload.audience.contains(audience)
+    logger.debug("payload {}", credential.payload.audience)
 
     if (containsAudience) {
         return JWTPrincipal(credential.payload)
@@ -26,6 +29,7 @@ fun Application.configureJWT() {
     val jwt = environment.config.config("jwt")
     val audience = jwt.property("audience").getString()
     val issuer = jwt.property("issuer").getString()
+    logger.debug("audience {}", audience)
 
     val jwkProvider =
         JwkProviderBuilder(issuer)
