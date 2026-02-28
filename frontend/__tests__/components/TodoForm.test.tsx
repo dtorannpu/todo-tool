@@ -1,53 +1,61 @@
-import '@testing-library/jest-dom/vitest';
-import TodoForm from '@/components/TodoForm';
-import { render, screen, cleanup } from '@testing-library/react';
-import userEvent from '@testing-library/user-event'
+import "@testing-library/jest-dom/vitest";
+import TodoForm from "@/components/TodoForm";
+import { render, screen, cleanup } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { vi } from "vitest";
 
-describe('登録フォーム', () => {
-    afterEach(() => {
-        cleanup();
-    });
+// next/navigationのモック
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({
+    push: vi.fn(),
+    refresh: vi.fn(),
+  }),
+}));
 
-    it('レンダリングされるか', () => {
-        render(<TodoForm />);
+describe("登録フォーム", () => {
+  afterEach(() => {
+    cleanup();
+  });
 
-        expect(screen.getByText('タイトル:')).toBeInTheDocument();
-        expect(screen.getByText('内容:')).toBeInTheDocument();
-        expect(screen.getByText('登録')).toBeInTheDocument();
-    });
+  it("レンダリングされるか", () => {
+    render(<TodoForm />);
 
-    it('未入力の時', () => {
-        render(<TodoForm />);
+    expect(screen.getByText("タイトル:")).toBeInTheDocument();
+    expect(screen.getByText("内容:")).toBeInTheDocument();
+    expect(screen.getByText("登録")).toBeInTheDocument();
+  });
 
-        expect(screen.getByTestId('registerButton')).toBeDisabled();
-    });
+  it("未入力の時", () => {
+    render(<TodoForm />);
 
-    it('タイトルのみ入力されている時', async () => {
-        render(<TodoForm />);
-        
-        const user = userEvent.setup();
-        await user.type(screen.getByTestId('titleField'), 'タイトル');
+    expect(screen.getByTestId("registerButton")).toBeDisabled();
+  });
 
-        expect(screen.getByTestId('registerButton')).toBeDisabled();
-    });
+  it("タイトルのみ入力されている時", async () => {
+    render(<TodoForm />);
 
+    const user = userEvent.setup();
+    await user.type(screen.getByTestId("titleField"), "タイトル");
 
-    it('内容のみ入力されている時', async () => {
-        render(<TodoForm />);
+    expect(screen.getByTestId("registerButton")).toBeDisabled();
+  });
 
-        const user = userEvent.setup();
-        await user.type(screen.getByTestId('descriptionField'), '内容');
+  it("内容のみ入力されている時", async () => {
+    render(<TodoForm />);
 
-        expect(screen.getByTestId('registerButton')).toBeDisabled();
-    });
+    const user = userEvent.setup();
+    await user.type(screen.getByTestId("descriptionField"), "内容");
 
-    it('タイトルと内容が入力されている時', async () => {
-        render(<TodoForm />);
+    expect(screen.getByTestId("registerButton")).toBeDisabled();
+  });
 
-        const user = userEvent.setup();
-        await user.type(screen.getByTestId('titleField'), 'タイトル');
-        await user.type(screen.getByTestId('descriptionField'), '内容');
+  it("タイトルと内容が入力されている時", async () => {
+    render(<TodoForm />);
 
-        expect(screen.getByTestId('registerButton')).toBeEnabled();
-    });
+    const user = userEvent.setup();
+    await user.type(screen.getByTestId("titleField"), "タイトル");
+    await user.type(screen.getByTestId("descriptionField"), "内容");
+
+    expect(screen.getByTestId("registerButton")).toBeEnabled();
+  });
 });

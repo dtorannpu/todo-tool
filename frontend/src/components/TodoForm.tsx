@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface IFormInput {
@@ -8,6 +9,7 @@ interface IFormInput {
 }
 
 const TodoForm = () => {
+  const router = useRouter();
   const {
     reset,
     register,
@@ -31,7 +33,7 @@ const TodoForm = () => {
     }
 
     reset();
-    window.location.href = "/todo";
+    router.push("/todo");
   }
 
   return (

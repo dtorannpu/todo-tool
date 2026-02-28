@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, use } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -10,6 +11,7 @@ interface IFormInput {
 }
 
 export default function Page(props: { params: Promise<{ id: number }> }) {
+  const router = useRouter();
   const params = use(props.params);
   const {
     register,
@@ -54,7 +56,7 @@ export default function Page(props: { params: Promise<{ id: number }> }) {
     if (!res.ok) {
       throw new Error("更新に失敗しました。");
     }
-    window.location.href = "/todo";
+    router.push("/todo");
   }
 
   async function deleteTodo(id: number | null) {
@@ -65,7 +67,7 @@ export default function Page(props: { params: Promise<{ id: number }> }) {
     if (!res.ok) {
       throw new Error("データが削除できませんでした。");
     }
-    window.location.href = "/todo";
+    router.push("/todo");
   }
 
   return (

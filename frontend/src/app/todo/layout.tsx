@@ -1,7 +1,11 @@
 import Header from "@/components/Header";
 import { Auth0Provider } from "@auth0/nextjs-auth0";
 
-export default function TodoLayout({ children }: any) {
+export default function TodoLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <Auth0Provider>
       <Header />
