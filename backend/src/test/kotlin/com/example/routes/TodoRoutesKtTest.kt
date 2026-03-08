@@ -27,7 +27,6 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
-import io.ktor.http.withCharset
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.install
 import io.ktor.server.config.ApplicationConfig
@@ -94,7 +93,7 @@ class TodoRoutesKtTest {
                     }
                 }.apply {
                     assertEquals(HttpStatusCode.OK, status)
-                    assertEquals(ContentType.Application.Json.withCharset(Charsets.UTF_8), contentType())
+                    assertEquals(ContentType.Application.Json, contentType())
                     val expectedJson =
                         """
                         [
@@ -145,7 +144,7 @@ class TodoRoutesKtTest {
                     }
                 }.apply {
                     assertEquals(HttpStatusCode.OK, status)
-                    assertEquals(ContentType.Application.Json.withCharset(Charsets.UTF_8), contentType())
+                    assertEquals(ContentType.Application.Json, contentType())
                     val expectedJson = """{"id": 1, "title":"title1", "description": "description1"}"""
                     JSONAssert.assertEquals(expectedJson, bodyAsText(), true)
                 }
