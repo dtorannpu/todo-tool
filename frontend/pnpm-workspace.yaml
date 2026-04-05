@@ -1,4 +1,4 @@
 ignoredBuiltDependencies:
   - sharp
   - unrs-resolver
-minimumReleaseAge: 4320
+minimumReleaseAge: 10080

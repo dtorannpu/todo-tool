@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "weekly"
     cooldown:
-      default-days: 3
+      default-days: 7
     assignees:
       - "dtorannpu"
     groups:
@@ -22,7 +22,7 @@ updates:
     schedule:
       interval: "weekly"
     cooldown:
-      default-days: 3
+      default-days: 7
     assignees:
       - "dtorannpu"
   - package-ecosystem: "github-actions"
@@ -30,6 +30,6 @@ updates:
     schedule:
       interval: "weekly"
     cooldown:
-      default-days: 3
+      default-days: 7
     assignees:
       - "dtorannpu"
