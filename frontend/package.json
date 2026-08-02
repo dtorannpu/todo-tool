@@ -21,27 +21,27 @@
     "react-hook-form": "7.82.0"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.2",
+    "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^26.1.0",
+    "@types/node": "^26.1.1",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
-    "@vitejs/plugin-react": "^6.0.3",
+    "@vitejs/plugin-react": "^6.0.4",
     "@vitest/coverage-v8": "^4.1.10",
     "cross-env": "^10.1.0",
-    "eslint": "^10.7.0",
-    "eslint-config-next": "^16.2.10",
+    "eslint": "^10.8.0",
+    "eslint-config-next": "^16.2.12",
     "jsdom": "^29.1.1",
-    "postcss": "^8.5.19",
-    "prettier": "^3.9.5",
-    "tailwindcss": "^4.3.2",
+    "postcss": "^8.5.23",
+    "prettier": "^3.9.6",
+    "tailwindcss": "^4.3.3",
     "ts-node": "^10.9.2",
     "typescript": "^6.0.3",
     "vite": "^8.1.5",
     "vitest": "^4.1.10"
   },
-  "packageManager": "pnpm@11.1.2+sha512.415a1cc25974731e75455c1468371be74c5aa5fb7621b50d4056d222451609f11412f23fd602e6169f1e060466641f798597e1be961a10688836a67b16569499"
+  "packageManager": "pnpm@11.18.0+sha512.33d83c77da82f49fba836925c6f1b841181ec3132b670639bd012f7075f5c7cf634c5f870147c19aae7478fac01df09d8892e880454896edd23ee9b33757563c"
 }
