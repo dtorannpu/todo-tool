@@ -34,7 +34,7 @@
     "cross-env": "^10.1.0",
     "eslint": "^10.8.0",
     "eslint-config-next": "^16.2.12",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.1",
     "postcss": "^8.5.23",
     "prettier": "^3.9.6",
     "tailwindcss": "^4.3.3",
