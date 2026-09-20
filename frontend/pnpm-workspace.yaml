@@ -3,3 +3,9 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
 minimumReleaseAge: 10080
+minimumReleaseAgeExclude:
+  - '@vitest/coverage-v8@5.0.1'
+  - '@vitest/mocker@5.0.1'
+  - '@vitest/spy@5.0.1'
+  - dotenv@18.0.1
+  - vitest@5.0.1
