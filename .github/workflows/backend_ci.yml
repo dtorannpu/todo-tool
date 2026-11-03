@@ -1,6 +1,13 @@
 name: Backend CI
 
 on:
+  push:
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend_ci.yml"
+      - ".github/workflows/actions.lock"
+    branches:
+      - "main"
   pull_request:
     paths:
       - "backend/**"

@@ -4,6 +4,13 @@
 name: Frontend Ci
 
 on:
+  push:
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend_ci.yml"
+      - ".github/workflows/actions.lock"
+    branches:
+      - "main"
   pull_request:
     paths:
       - "frontend/**"
