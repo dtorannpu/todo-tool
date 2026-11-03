@@ -7,6 +7,8 @@ on:
   pull_request:
     paths:
       - "frontend/**"
+      - ".github/workflows/frontend_ci.yml"
+      - ".github/workflows/actions.lock"
     branches:
       - "main"
 
